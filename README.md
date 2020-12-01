@@ -83,7 +83,8 @@ This is the third project of the Full Stack Developer course at Acamica.
 Examples:
 
 ```sh
-$curl -H "Content-Type: application/json" --request POST -d '{ "username": "admin", "password": "admin" }' http://localhost:3000/customers/login
+$curl -H "Content-Type: application/json" --request POST -d '{ "username": "admin", "password": "admin" }' \
+    http://localhost:3000/customers/login
 ```
 
 
