@@ -52,7 +52,21 @@ This is the third project of the Full Stack Developer course at Acamica.
     cd delilah-resto-api/db
     $ mysql -u root -p#### -h localhost < delilah_resto.sql
     ```
-    replace the #### with the password you set for the db
+    NOTE: replace the #### with the password you set for the db
+
+7. Start the REST API
+
+    ```sh
+    cd delilah-resto-api
+    $ npm start
+    ```
+    
+    Check that the REST API is working
+    ```sh
+    [INFO] Connecting to the Database (delilah_resto) on port 3306...
+    [INFO] Connection established!
+    [INFO] Starting Delilah Resto API Server, listening on port 3000
+    ```
 
 # Endpoints
 
