@@ -47,3 +47,9 @@ This is the third project of the Full Stack Developer course at Acamica.
     DB_NAME=delilah_resto
     DB_PORT=3306
     ```
+6. Import the Delilah Resto Database schemas into the DB:
+    ```sh
+    cd delilah-resto-api/db
+    $ mysql -u root -p#### -h localhost < delilah_resto.sql
+    ```
+    replace the #### with the password you set for the db
