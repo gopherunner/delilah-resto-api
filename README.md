@@ -53,3 +53,11 @@ This is the third project of the Full Stack Developer course at Acamica.
     $ mysql -u root -p#### -h localhost < delilah_resto.sql
     ```
     replace the #### with the password you set for the db
+
+# Endpoints
+
+|  METHOD | ENDPOINT            | BODY                                                           | HEADER    | DESCRIPTION                               |
+|---------|---------------------|----------------------------------------------------------------|-----------|-------------------------------------------|
+| POST    | /customers/register | { username, password, fullname, address, email, phone_number } |           | Create a new Customer                     |
+| POST    | /customers/login    | { username, password }                                         |           | Login Customer and get the customer Token |
+| GET     | /customers/orders   |                                                                | { token } | Returns all the orders from the customer  |
