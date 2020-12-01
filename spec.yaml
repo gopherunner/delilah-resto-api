@@ -1,0 +1,509 @@
+---
+openapi: 3.0.0
+info:
+  title: Delilah Resto API
+  description: This is the REST API for Delilah Resto project
+  contact:
+    email: yodasbunker@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+- url: http://localhost:3000
+  description: Delilah Resto Project
+tags:
+- name: customers
+  description: Customers endpoints
+- name: products
+  description: Products endpoints
+- name: orders
+  description: Orders endpoints
+paths:
+  /customers/register:
+    post:
+      tags:
+      - customers
+      summary: creates a new customer
+      description: Adds a new Customer in the system
+      operationId: addCustomer
+      requestBody:
+        description: Customer to register
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRegister'
+      responses:
+        "201":
+          description: customer created successfully
+          content:
+            text/plain:
+              example: 'Customer created successfully with ID: 2'
+        "400":
+          description: invalid input, object invalid
+        "409":
+          description: an existing customer already exists
+      security: []
+  /customers/login:
+    post:
+      tags:
+      - customers
+      summary: customer login into the api
+      description: Login customer into the API
+      operationId: loginCustomer
+      requestBody:
+        description: Customer to Login
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerLogin'
+      responses:
+        "201":
+          description: customer login successfully!
+          content:
+            text/plain:
+              example: Customer Login successfully!
+        "400":
+          description: invalid input, object invalid
+        "404":
+          description: customer already login
+  /customers/orders:
+    get:
+      tags:
+      - customers
+      summary: orders from customer
+      description: get orders from customer
+      responses:
+        "201":
+          description: successfully getting orders from customer
+          content:
+            application/json:
+              example:
+                orders:
+                - order_id: 5
+                  customer_id: 3
+                  order_status: delivered
+                  order_time: 2020-11-30T17:03:52.000Z
+                  payment_method: cash
+                  order_total: "300.20"
+                  address: Customer Address 123
+                  products:
+                  - product_id: 1
+                    product_name: Milanesa Napolitana
+                    product_detail: Milanesa Napolitana con queso y salsa de tomate
+                    product_price: "300.20"
+                    product_photo: https://cdn1.cocina-familiar.com/recetas/thumb/como-hacer-la-mejor-milanesa-a-la-napolitana.JPG
+                    created_at: 2020-11-25T14:34:16.000Z
+                    active: true
+                    orders_details:
+                      product_qty: 1
+      security:
+      - BearerAuth: []
+  /products/{productId}:
+    get:
+      tags:
+      - products
+      summary: get product by Id from the api
+      description: get the product from the API
+      operationId: getProduct
+      parameters:
+      - name: productId
+        in: path
+        description: Product ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "201":
+          description: get product successfully!
+          content:
+            application/json:
+              example:
+                product:
+                  product_id: 1
+                  product_name: Milanesa Napolitana
+                  product_detail: Milanesa Napolitana con queso y salsa de tomate
+                  product_price: "300.20"
+                  product_photo: https://cdn1.cocina-familiar.com/recetas/thumb/como-hacer-la-mejor-milanesa-a-la-napolitana.JPG
+                  created_at: 2020-11-25T14:34:16.000Z
+                  active: true
+        "400":
+          description: invalid input, object invalid
+        "404":
+          description: error while getting the product
+      security:
+      - BearerAuth: []
+  /products:
+    get:
+      tags:
+      - products
+      summary: get all products from the api
+      description: get the products from the API
+      operationId: getProducts
+      responses:
+        "201":
+          description: get products successfully!
+          content:
+            application/json:
+              example:
+                products:
+                - product_id: 1
+                  product_name: Milanesa Napolitana
+                  product_detail: Milanesa Napolitana con queso y salsa de tomate
+                  product_price: "300.20"
+                  product_photo: https://cdn1.cocina-familiar.com/recetas/thumb/como-hacer-la-mejor-milanesa-a-la-napolitana.JPG
+                  created_at: 2020-11-25T14:34:16.000Z
+                  active: true
+        "400":
+          description: invalid input, object invalid
+        "404":
+          description: error while getting the products
+      security:
+      - BearerAuth: []
+    put:
+      tags:
+      - products
+      summary: update an existing product
+      description: update a product
+      operationId: updateProduct
+      responses:
+        "201":
+          description: product updated successfully!
+          content:
+            application/json:
+              example:
+                msg: Product updated successfully!
+        "400":
+          description: invalid input, object invalid
+        "404":
+          description: error while trying to update a product
+      security:
+      - BearerAuth: []
+    post:
+      tags:
+      - products
+      summary: create a new product
+      description: add a new Product into the API
+      operationId: createProduct
+      responses:
+        "201":
+          description: product created successfully!
+          content:
+            application/json:
+              example:
+                msg: Product created successfully!
+                product_id: 3
+        "400":
+          description: invalid input, object invalid
+        "404":
+          description: error while trying to create the product
+      security:
+      - BearerAuth: []
+    delete:
+      tags:
+      - products
+      summary: delete an existing product
+      description: delete a product
+      operationId: deleteProduct
+      responses:
+        "201":
+          description: product deleted successfully!
+          content:
+            application/json:
+              example:
+                msg: Product deleted successfully!
+        "400":
+          description: invalid input, object invalid
+        "404":
+          description: error while trying to delete a product
+      security:
+      - BearerAuth: []
+  /orders/{orderId}:
+    put:
+      tags:
+      - orders
+      summary: modify the status of an order
+      parameters:
+      - name: orderId
+        in: path
+        description: Id of the Order to modify
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          example: 2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifiedOrder'
+        required: true
+      responses:
+        "201":
+          description: Order modified successfully!
+          content:
+            text/plain:
+              example: Order with Id 2, modified successfully!
+        "403":
+          description: Customer not authenticated!
+          content:
+            text/plain:
+              example: You dont have Administrator permissions
+        "400":
+          description: There was an error with the request
+      security:
+      - BearerAuth: []
+    delete:
+      tags:
+      - orders
+      summary: Delete an order
+      parameters:
+      - name: orderId
+        in: path
+        description: Id of the Order to delete
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          example: 1
+      responses:
+        "200":
+          description: Order successfully deleted!
+          content:
+            text/plain:
+              example: Order with Id 1, successfully deleted!
+        "403":
+          description: Customer not authenticated!
+          content:
+            text/plain:
+              example: You dont have Administrator permissions
+        "400":
+          description: There was an error with the request
+      security:
+      - BearerAuth: []
+  /orders:
+    get:
+      tags:
+      - orders
+      summary: get orders from the API
+      description: get all orders
+      operationId: getOrders
+      responses:
+        "201":
+          description: listing orders successfully!
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Orders'
+        "400":
+          description: invalid input, object invalid
+        "409":
+          description: error while getting orders from the API
+      security:
+      - BearerAuth: []
+    post:
+      tags:
+      - orders
+      summary: create a new order
+      description: create a new order
+      operationId: createOrder
+      requestBody:
+        description: Order to register
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderRegister'
+      responses:
+        "201":
+          description: order created successfully
+          content:
+            text/plain:
+              example: 'Order created successfully with ID: 1'
+        "400":
+          description: invalid input, object invalid
+        "409":
+          description: an existing order already exists
+      security:
+      - BearerAuth: []
+components:
+  schemas:
+    ModifiedOrder:
+      type: object
+      properties:
+        order_status:
+          type: string
+          description: Status of the Order
+          enum:
+          - new
+          - confirmed
+          - preparing
+          - delivering
+          - delivered
+    Orders:
+      type: object
+      properties:
+        order_id:
+          type: integer
+          description: Id of the Order
+          example: 2
+        customer_id:
+          type: integer
+          description: Id of the Customer who made the Order
+          example: 1
+        order_total:
+          type: number
+          description: Total amount to be paid
+          example: 400.2
+        order_status:
+          type: string
+          description: Actual state of the Order
+          example: new
+          enum:
+          - new
+          - confirmed
+          - preparing
+          - delivering
+          - delivered
+          - canceled
+        payment_method:
+          type: string
+          description: Payment method to actually pay the order
+          example: cash
+          enum:
+          - cash
+          - credit card
+          - debit card
+        address:
+          type: string
+          description: Address to deliver the Order
+          example: customer address 123
+        order_time:
+          type: string
+          description: time that the order was made
+          example: 2020-11-30 17:03:52
+        products:
+          type: array
+          description: products that belong to the order
+          items:
+            $ref: '#/components/schemas/Product'
+    OrderRegister:
+      required:
+      - payment_method
+      - products
+      - username
+      type: object
+      properties:
+        username:
+          type: string
+          example: customer1
+        payment_method:
+          type: string
+          example: new
+          enum:
+          - new
+          - confirmed
+          - preparing
+          - delivering
+          - delivered
+          - canceled
+        products:
+          type: object
+          example:
+            product_id: 1
+            product_qty: 2
+    Product:
+      required:
+      - active
+      - created_at
+      - product_detail
+      - product_id
+      - product_name
+      - product_photo
+      - product_price
+      type: object
+      properties:
+        product_id:
+          type: integer
+          example: 1
+        product_name:
+          type: string
+          example: Milanesa Napolitana
+        product_detail:
+          type: string
+          example: Milanesa Napolitana con queso y salsa de tomate
+        product_photo:
+          type: string
+          example: https://cdn1.cocina-familiar.com/recetas/thumb/como-hacer-la-mejor-milanesa-a-la-napolitana.JPG
+        created_at:
+          type: string
+          example: 2020-11-25T14:34:16.000Z
+        active:
+          type: boolean
+          example: true
+    CustomerRegister:
+      required:
+      - active
+      - address
+      - creation_date
+      - customer_id
+      - email
+      - fullname
+      - is_admin
+      - password
+      - phone_number
+      - username
+      type: object
+      properties:
+        customer_id:
+          type: integer
+          example: 1
+        username:
+          type: string
+          example: customer1
+        password:
+          type: string
+          example: customer1
+        fullname:
+          type: string
+          example: customer one
+        address:
+          type: string
+          example: customer 1234
+        email:
+          type: string
+          example: customer1@customer.com
+        phone_number:
+          type: string
+          example: "1234567890"
+        is_admin:
+          type: boolean
+          example: false
+        creation_date:
+          type: string
+          format: date-time
+        active:
+          type: boolean
+          example: true
+    CustomerLogin:
+      required:
+      - password
+      - username
+      type: object
+      properties:
+        username:
+          type: string
+          example: customer1
+        password:
+          type: string
+          example: customer1
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
