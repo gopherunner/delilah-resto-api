@@ -58,23 +58,23 @@ This is the third project of the Full Stack Developer course at Acamica.
 
 ### Customers
 
-|  METHOD | ENDPOINT            | BODY                                                           | HEADER    | DESCRIPTION                               |
-|---------|---------------------|----------------------------------------------------------------|-----------|-------------------------------------------|
-| POST    | /customers/register | { username, password, fullname, address, email, phone_number } |           | Create a new Customer                     |
-| POST    | /customers/login    | { username, password }                                         |           | Login Customer and get the customer Token |
-| GET     | /customers/orders   |                                                                | { token } | Returns all the orders from the customer  |
-| PUT     | /customers/:id      |                                                                | { token } | Modify an existing Customer               |
-| DELETE  | /customers/:id      |                                                                | { token } | Deletes an existing Customer              |
+|  METHOD | ENDPOINT            | BODY                                                           | HEADER         | DESCRIPTION                               |
+|---------|---------------------|----------------------------------------------------------------|----------------|-------------------------------------------|
+| POST    | /customers/register | { username, password, fullname, address, email, phone_number } |                | Create a new Customer                     |
+| POST    | /customers/login    | { username, password }                                         |                | Login Customer and get the Token          |
+| GET     | /customers/orders   |                                                                | { token }      | Returns all the orders from the customer  |
+| PUT     | /customers/:id      |                                                                | { adminToken } | Modify an existing Customer               |
+| DELETE  | /customers/:id      |                                                                | { adminToken } | Deletes an existing Customer              |
 
 ### Products
 
-|  METHOD | ENDPOINT      | BODY                                                                   | HEADER    | DESCRIPTION                 |
-|---------|---------------|------------------------------------------------------------------------|-----------|-----------------------------|
-| POST    | /products     | { username, password, fullname, address, email, phone_number }         |           | Create a new Product        |
-| GET     | /products     | { username, password }                                                 | { token } | Return all the Products     |
-| GET     | /products/:id |                                                                        | { token } | Return an specific Product  |
-| PUT     | /products/:id | { product_name, product_detail, product_price, product_photo, active } | { token } | Modify an existing Product  |
-| DELETE  | /products/:id |                                                                        | { token } | Deletes an existing Product |
+|  METHOD | ENDPOINT      | BODY                                                                           | HEADER         | DESCRIPTION                 |
+|---------|---------------|--------------------------------------------------------------------------------|----------------|-----------------------------|
+| POST    | /products     | { username, password, fullname, address, email, phone_number }                 | { adminToken } | Create a new Product        |
+| GET     | /products     |                                                                                | { token }      | Return all the Products     |
+| GET     | /products/:id |                                                                                | { token }      | Return an specific Product  |
+| PUT     | /products/:id | { product_name || product_detail || product_price || product_photo || active } | { adminToken } | Modify an existing Product  |
+| DELETE  | /products/:id |                                                                                | { adminToken } | Deletes an existing Product |
 
 ### Orders
 
