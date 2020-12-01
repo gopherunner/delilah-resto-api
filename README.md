@@ -69,11 +69,24 @@ This is the third project of the Full Stack Developer course at Acamica.
     ```
 # Examples
 
-- Customer Login 
+* Customer Login
+
 ```sh
 $curl -H "Content-Type: application/json" --request POST -d '{ "username": "admin", "password": "admin" }' \
     http://localhost:3000/customers/login
 ```
+* Retrieve the Token to use later on
+
+```sh
+$ TOKEN=$(curl -H "Content-Type: application/json" --request POST -d '{ "username": "admin", "password": "admin" }' http://localhost:3000/customers/login | jq -r '.token')
+```
+* List all the available Orders
+
+```sh
+$ curl -H 'Accept: application/json' -H "Authorization: Bearer ${TOKEN}" --request GET \
+    http://localhost:3000/orders | json_pp -json_opt pretty,canonical
+```
+
 
 # Endpoints
 
