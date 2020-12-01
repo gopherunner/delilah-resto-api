@@ -80,6 +80,13 @@ This is the third project of the Full Stack Developer course at Acamica.
 | PUT     | /customers/:id      |                                                                | { adminToken } | Modify an existing Customer               |
 | DELETE  | /customers/:id      |                                                                | { adminToken } | Deletes an existing Customer              |
 
+Examples:
+
+```sh
+$curl -H "Content-Type: application/json" --request POST -d '{ "username": "admin", "password": "admin" }' http://localhost:3000/customers/login
+```
+
+
 ### Products
 
 |  METHOD | ENDPOINT      | BODY                                                                           | HEADER         | DESCRIPTION                 |
