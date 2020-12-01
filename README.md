@@ -67,6 +67,13 @@ This is the third project of the Full Stack Developer course at Acamica.
     [INFO] Connection established!
     [INFO] Starting Delilah Resto API Server, listening on port 3000
     ```
+# Examples
+
+- Customer Login 
+```sh
+$curl -H "Content-Type: application/json" --request POST -d '{ "username": "admin", "password": "admin" }' \
+    http://localhost:3000/customers/login
+```
 
 # Endpoints
 
@@ -79,14 +86,6 @@ This is the third project of the Full Stack Developer course at Acamica.
 | GET     | /customers/orders   |                                                                | { token }      | Returns all the orders from the customer  |
 | PUT     | /customers/:id      |                                                                | { adminToken } | Modify an existing Customer               |
 | DELETE  | /customers/:id      |                                                                | { adminToken } | Deletes an existing Customer              |
-
-Examples:
-
-```sh
-$curl -H "Content-Type: application/json" --request POST -d '{ "username": "admin", "password": "admin" }' \
-    http://localhost:3000/customers/login
-```
-
 
 ### Products
 
