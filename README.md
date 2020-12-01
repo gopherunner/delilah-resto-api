@@ -73,7 +73,7 @@ This is the third project of the Full Stack Developer course at Acamica.
 | POST    | /products     | { username, password, fullname, address, email, phone_number }                 | { adminToken } | Create a new Product        |
 | GET     | /products     |                                                                                | { token }      | Return all the Products     |
 | GET     | /products/:id |                                                                                | { token }      | Return an specific Product  |
-| PUT     | /products/:id | { product_name || product_detail || product_price || product_photo || active } | { adminToken } | Modify an existing Product  |
+| PUT     | /products/:id | { product_name, product_detail, product_price, product_photo, active }         | { adminToken } | Modify an existing Product  |
 | DELETE  | /products/:id |                                                                                | { adminToken } | Deletes an existing Product |
 
 ### Orders
