@@ -77,7 +77,7 @@ This is the third project of the Full Stack Developer course at Acamica.
     brew install jq
     ```
 
-# Examples
+# Examples with cURL
 
 * **Customer Login and retrieve the Token to use later on**
 
@@ -98,6 +98,26 @@ $ curl -H 'Accept: application/json' -H "Authorization: Bearer ${TOKEN}" --reque
 ```sh
 $ curl -H 'Accept: application/json' -H "Authorization: Bearer ${TOKEN}" --request GET \
     http://localhost:3000/orders | json_pp -json_opt pretty,canonical
+```
+
+# Postman examples
+
+```sh
+POST    http://localhost:3000/orders
+{
+    "username": "admin",
+    "payment_method": "cash",
+    "products": [
+        {
+            "product_id": 2,
+            "product_qty": 3
+        },
+        {
+            "product_id": 1,
+            "product_qty": 1
+        }
+    ]
+}
 ```
 
 
