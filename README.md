@@ -86,7 +86,7 @@ $ TOKEN=$(curl -H "Content-Type: application/json" --request POST -d '{ "usernam
     http://localhost:3000/customers/login | jq -r '.token')
 ```
 
-* **List all the available Products **
+* **List all the available Products**
 
 ```sh
 $ curl -H 'Accept: application/json' -H "Authorization: Bearer ${TOKEN}" --request GET http://localhost:3000/products \
