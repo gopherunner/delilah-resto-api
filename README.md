@@ -12,6 +12,7 @@ This is the third project of the Full Stack Developer course at Acamica.
    ```
 2. Install NPM packages
     ```sh
+    cd delilah-resto-api
     npm install
     ```
 ### Install & configure the MySQL (MariaDB) database (in this example I did it for MacOS)
@@ -54,7 +55,7 @@ This is the third project of the Full Stack Developer course at Acamica.
     ```
     NOTE: replace the #### with the password you set for the db
 
-7. Start the REST API
+7. Start the REST API:
 
     ```sh
     cd delilah-resto-api
@@ -67,20 +68,31 @@ This is the third project of the Full Stack Developer course at Acamica.
     [INFO] Connection established!
     [INFO] Starting Delilah Resto API Server, listening on port 3000
     ```
+
+8. Install JSON commandline JQ:
+    
+    in Mac OS:
+    
+    ```sh
+    brew install jq
+    ```
+
 # Examples
 
-* **Customer Login**
-
-```sh
-$curl -H "Content-Type: application/json" --request POST -d '{ "username": "admin", "password": "admin" }' \
-    http://localhost:3000/customers/login
-```
-* **Retrieve the Token to use later on**
+* **Customer Login and retrieve the Token to use later on**
 
 ```sh
 $ TOKEN=$(curl -H "Content-Type: application/json" --request POST -d '{ "username": "admin", "password": "admin" }' \
     http://localhost:3000/customers/login | jq -r '.token')
 ```
+
+* **List all the available Products **
+
+```sh
+$ curl -H 'Accept: application/json' -H "Authorization: Bearer ${TOKEN}" --request GET http://localhost:3000/products \
+    | json_pp -json_opt pretty
+```
+
 * **List all the available Orders**
 
 ```sh
@@ -99,7 +111,6 @@ $ curl -H 'Accept: application/json' -H "Authorization: Bearer ${TOKEN}" --reque
 | POST    | /customers/login    | { username, password }                                         |                | Login Customer and get the Token          |
 | GET     | /customers/orders   |                                                                | { token }      | Returns all the orders from the customer  |
 | PUT     | /customers/:id      |                                                                | { adminToken } | Modify an existing Customer               |
-| DELETE  | /customers/:id      |                                                                | { adminToken } | Deletes an existing Customer              |
 
 ### Products
 
